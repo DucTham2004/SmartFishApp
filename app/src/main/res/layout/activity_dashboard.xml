@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp"
+    tools:context=".DashboardActivity">
+
+    <TextView
+        android:id="@+id/tvTemperature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nhiệt độ: -- °C"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvHumidity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Độ ẩm: -- %"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/tvWaterLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Mực nước: -- cm"
+        android:textSize="24sp" />
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/swLight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Đèn Bể Cá"
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Điều khiển màu LED"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/btnRed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Đỏ"
+            android:backgroundTint="#FF0000" />
+
+        <Button
+            android:id="@+id/btnGreen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Xanh"
+            android:backgroundTint="#00FF00" />
+
+        <Button
+            android:id="@+id/btnOff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Tắt" />
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/edtColorCode"
+        android:layout_width="match_parent"
+        android:layout_height="87dp"
+        android:ems="10"
+        android:hint="FFFFFF"
+        android:inputType="text" />
+
+    <Button
+        android:id="@+id/btnSubmitColor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Oke" />
+
+
+</LinearLayout>
