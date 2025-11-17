@@ -16,27 +16,37 @@ import okhttp3.Request
 import okhttp3.Response
 import okhttp3.WebSocket
 import okhttp3.WebSocketListener
-import kotlinx.serialization.json.JsonArray // <-- THÊM IMPORT NÀY
-import com.google.android.material.switchmaterial.SwitchMaterial // <-- THÊM MỚI
-import android.widget.CompoundButton // <-- THÊM MỚI
-import android.widget.Toast // <-- THÊM MỚI
+import kotlinx.serialization.json.JsonArray
+import com.google.android.material.switchmaterial.SwitchMaterial
+import android.widget.CompoundButton
+import android.widget.Toast
 import android.widget.Button
 import android.widget.EditText
 import com.airbnb.lottie.LottieAnimationView
 import kotlin.math.roundToInt
+
+// --- THÊM CÁC IMPORT NÀY ---
+import android.widget.ImageButton
+import com.github.dhaval2404.colorpicker.MaterialColorPickerDialog
+import com.github.dhaval2404.colorpicker.model.ColorShape
+import com.github.dhaval2404.colorpicker.listener.ColorListener
+// --- KẾT THÚC THÊM IMPORT ---
 
 class DashboardActivity : AppCompatActivity() {
 
     private lateinit var tvTemperature: TextView
     private lateinit var tvHumidity: TextView
     private lateinit var tvWaterLevel: TextView
-//    private lateinit var swLight: SwitchMaterial
-//    private lateinit var btnRed: Button // <-- THÊM MỚI
-//    private lateinit var btnGreen: Button // <-- THÊM MỚI
+    //    private lateinit var swLight: SwitchMaterial
+//    private lateinit var btnRed: Button
+//    private lateinit var btnGreen: Button
 //    private lateinit var btnOff: Button
 //    private lateinit var edtColorCode: EditText
 //    private lateinit var btnColorSubmit: Button
     private lateinit var dotLottieAnimationView: LottieAnimationView
+
+    // --- THÊM BIẾN CHO NÚT MÀU ---
+    private lateinit var btnColorPicker: ImageButton
 
 
     private lateinit var sessionManager: SessionManager
@@ -58,9 +68,8 @@ class DashboardActivity : AppCompatActivity() {
 //        swLight = findViewById(R.id.swLight) // <-- ÁNH XẠ SWITCH
         dotLottieAnimationView = findViewById(R.id.ivFishTank)
 
-
-
-
+        // --- ÁNH XẠ NÚT CHỌN MÀU ---
+        btnColorPicker = findViewById(R.id.imageButton4) // ID từ file XML
 
         sessionManager = SessionManager(applicationContext)
 
@@ -76,6 +85,11 @@ class DashboardActivity : AppCompatActivity() {
         // Bắt đầu kết nối WebSocket
         startWebSocket(token)
 
+        // --- XỬ LÝ SỰ KIỆN CLICK CHO NÚT CHỌN MÀU ---
+        btnColorPicker.setOnClickListener {
+            showColorBrightnessPicker(token)
+        }
+
         // --- THÊM LOGIC XỬ LÝ SWITCH ---
 //        swLight.setOnCheckedChangeListener { _, isChecked ->
 //            // isChecked sẽ là 'true' nếu bật, 'false' nếu tắt
@@ -88,6 +102,24 @@ class DashboardActivity : AppCompatActivity() {
 //        btnOff.setOnClickListener { sendColorControl(token, "#000000") } // Màu đen = Tắt
 //        btnColorSubmit.setOnClickListener {sendColorControl(token, edtColorCode.text.toString())}
     }
+
+    // --- HÀM MỚI ĐỂ HIỂN THỊ BẢNG CHỌN MÀU VÀ ĐỘ SÁNG ---
+    private fun showColorBrightnessPicker(token: String) {
+        MaterialColorPickerDialog
+            .Builder(this)
+            .setTitle("Chọn màu & độ sáng")
+            .setColorShape(ColorShape.SQAURE) // Hình dạng ô màu
+            .setColorListener(object : ColorListener {
+                override fun onColorSelected(color: Int, hexColor: String) {
+                    // color là dạng Int, hexColor là dạng chuỗi "#RRGGBB"
+                    Log.d("DashboardActivity", "Màu đã chọn: $hexColor")
+                    // Gửi màu đã chọn lên ThingsBoard
+                    sendColorControl(token, hexColor)
+                }
+            })
+            .show()
+    }
+
 
     // --- HÀM MỚI ĐỂ GỌI API ---
     private fun sendLightControl(token: String, isChecked: Boolean) {
@@ -190,7 +222,7 @@ class DashboardActivity : AppCompatActivity() {
                 // và bạn sẽ cần tự lấy nó
                 // HÃY HỎI TÔI CÁCH LẤY NẾU BẠN KHÔNG TÌM THẤY
 
-                 webSocket.send(subscriptionMessage)
+                webSocket.send(subscriptionMessage)
 //                Log.w("DashboardActivity", "Chưa gửi subscription. Bạn cần thêm Device ID.")
             }
 
