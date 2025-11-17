@@ -145,7 +145,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         android:contentDescription="Hình ảnh bể cá"
-        app:layout_constraintBottom_toTopOf="@+id/layoutControls"
+        app:layout_constraintBottom_toTopOf="@+id/layoutBrightness"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -160,29 +160,39 @@
     <LinearLayout
         android:id="@+id/layoutBrightness"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:paddingHorizontal="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/layoutControls"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" android:layout_marginBottom="16dp" app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivFishTank"
-        app:layout_constraintVertical_weight="0.5"> <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Độ sáng:"
-        android:textColor="@android:color/black"
-        android:textSize="16sp" />
+        app:layout_constraintBottom_toTopOf="@+id/layoutControls">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="Độ sáng thấp"
+            android:src="@drawable/baseline_brightness_low_24"
+            app:tint="#FFEB3B" />
 
         <SeekBar
             android:id="@+id/seekBarBrightness"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:layout_weight="1"
             android:max="255"
-            android:progress="50" /> </LinearLayout>
+            android:progress="50" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="Độ sáng cao"
+            android:src="@drawable/baseline_brightness_high_24"
+            app:tint="#FFEB3B" />
+    </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layoutControls"
@@ -193,7 +203,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivFishTank"
+        app:layout_constraintTop_toBottomOf="@+id/layoutBrightness"
         app:layout_constraintVertical_weight="1">
 
         <ImageButton
