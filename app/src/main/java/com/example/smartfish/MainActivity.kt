@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
 
         etUsername = findViewById(R.id.edtEmail) // <-- Thay ID
         etPassword = findViewById(R.id.edtPassword) // <-- Thay ID
-        btnLogin = findViewById(R.id.login)       // <-- Thay ID
+        btnLogin = findViewById(R.id.btnLogin)       // <-- Thay ID
 
         // Xử lý sự kiện click
         btnLogin.setOnClickListener {

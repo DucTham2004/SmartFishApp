@@ -22,18 +22,22 @@ import android.widget.CompoundButton // <-- THÊM MỚI
 import android.widget.Toast // <-- THÊM MỚI
 import android.widget.Button
 import android.widget.EditText
+import com.airbnb.lottie.LottieAnimationView
+import kotlin.math.roundToInt
 
 class DashboardActivity : AppCompatActivity() {
 
     private lateinit var tvTemperature: TextView
     private lateinit var tvHumidity: TextView
     private lateinit var tvWaterLevel: TextView
-    private lateinit var swLight: SwitchMaterial
-    private lateinit var btnRed: Button // <-- THÊM MỚI
-    private lateinit var btnGreen: Button // <-- THÊM MỚI
-    private lateinit var btnOff: Button
-    private lateinit var edtColorCode: EditText
-    private lateinit var btnColorSubmit: Button
+//    private lateinit var swLight: SwitchMaterial
+//    private lateinit var btnRed: Button // <-- THÊM MỚI
+//    private lateinit var btnGreen: Button // <-- THÊM MỚI
+//    private lateinit var btnOff: Button
+//    private lateinit var edtColorCode: EditText
+//    private lateinit var btnColorSubmit: Button
+    private lateinit var dotLottieAnimationView: LottieAnimationView
+
 
     private lateinit var sessionManager: SessionManager
     private val client = OkHttpClient()
@@ -51,13 +55,11 @@ class DashboardActivity : AppCompatActivity() {
         tvTemperature = findViewById(R.id.tvTemperature)
         tvHumidity = findViewById(R.id.tvHumidity)
         tvWaterLevel = findViewById(R.id.tvWaterLevel)
-        swLight = findViewById(R.id.swLight) // <-- ÁNH XẠ SWITCH
+//        swLight = findViewById(R.id.swLight) // <-- ÁNH XẠ SWITCH
+        dotLottieAnimationView = findViewById(R.id.ivFishTank)
 
-        btnRed = findViewById(R.id.btnRed)
-        btnGreen = findViewById(R.id.btnGreen)
-        btnOff = findViewById(R.id.btnOff)
-        edtColorCode = findViewById(R.id.edtColorCode)
-        btnColorSubmit = findViewById(R.id.btnSubmitColor)
+
+
 
 
         sessionManager = SessionManager(applicationContext)
@@ -75,16 +77,16 @@ class DashboardActivity : AppCompatActivity() {
         startWebSocket(token)
 
         // --- THÊM LOGIC XỬ LÝ SWITCH ---
-        swLight.setOnCheckedChangeListener { _, isChecked ->
-            // isChecked sẽ là 'true' nếu bật, 'false' nếu tắt
-            sendLightControl(token, isChecked)
-        }
+//        swLight.setOnCheckedChangeListener { _, isChecked ->
+//            // isChecked sẽ là 'true' nếu bật, 'false' nếu tắt
+//            sendLightControl(token, isChecked)
+//        }
 
         // THÊM LISTENER CHO CÁC NÚT MÀU
-        btnRed.setOnClickListener { sendColorControl(token, "#FF0000") } // Gửi mã hex
-        btnGreen.setOnClickListener { sendColorControl(token, "#00FF00") }
-        btnOff.setOnClickListener { sendColorControl(token, "#000000") } // Màu đen = Tắt
-        btnColorSubmit.setOnClickListener {sendColorControl(token, edtColorCode.text.toString())}
+//        btnRed.setOnClickListener { sendColorControl(token, "#FF0000") } // Gửi mã hex
+//        btnGreen.setOnClickListener { sendColorControl(token, "#00FF00") }
+//        btnOff.setOnClickListener { sendColorControl(token, "#000000") } // Màu đen = Tắt
+//        btnColorSubmit.setOnClickListener {sendColorControl(token, edtColorCode.text.toString())}
     }
 
     // --- HÀM MỚI ĐỂ GỌI API ---
@@ -238,16 +240,16 @@ class DashboardActivity : AppCompatActivity() {
                             }
 
                             // Sử dụng hàm helper
-                            val temp = extractValue(telemetryDataElement, "nhietDo")
-                            val humid = extractValue(telemetryDataElement, "doAm")
-                            val waterLevel = extractValue(telemetryDataElement, "mucNuoc_cm") // <-- LẤY DỮ LIỆU MỚI
+                            val temp = extractValue(telemetryDataElement, "nhietDo")?.toFloatOrNull()
+                            val humid = extractValue(telemetryDataElement, "doAm")?.toFloatOrNull()
+                            val waterLevel = extractValue(telemetryDataElement, "mucNuoc_cm")?.toFloatOrNull() // <-- LẤY DỮ LIỆU MỚI
                             // === KẾT THÚC PHẦN SỬA ===
 
                             // 3. Cập nhật UI (giữ nguyên)
                             lifecycleScope.launch(Dispatchers.Main) {
-                                temp?.let { tvTemperature.text = "Nhiệt độ: $it °C" }
-                                humid?.let { tvHumidity.text = "Độ ẩm: $it %" }
-                                waterLevel?.let { tvWaterLevel.text = "Mực nước: $it cm" } // <-- CẬP NHẬT UI
+                                temp?.let { tvTemperature.text = "${it.roundToInt()} °C" }
+                                humid?.let { tvHumidity.text = "${it.roundToInt()} %" }
+                                waterLevel?.let { tvWaterLevel.text = "${it.roundToInt()} cm" } // <-- CẬP NHẬT UI
                             }
                         } else {
                             Log.d("DashboardActivity", "Dữ liệu (data) rỗng, bỏ qua.")
