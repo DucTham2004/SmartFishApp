@@ -5,6 +5,7 @@ import android.util.Log
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import android.widget.SeekBar // <-- THÊM IMPORT
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
@@ -37,12 +38,7 @@ class DashboardActivity : AppCompatActivity() {
     private lateinit var tvTemperature: TextView
     private lateinit var tvHumidity: TextView
     private lateinit var tvWaterLevel: TextView
-    //    private lateinit var swLight: SwitchMaterial
-//    private lateinit var btnRed: Button
-//    private lateinit var btnGreen: Button
-//    private lateinit var btnOff: Button
-//    private lateinit var edtColorCode: EditText
-//    private lateinit var btnColorSubmit: Button
+    private lateinit var seekBarBrightness: SeekBar
     private lateinit var dotLottieAnimationView: LottieAnimationView
 
     // --- THÊM BIẾN CHO NÚT MÀU ---
@@ -70,6 +66,8 @@ class DashboardActivity : AppCompatActivity() {
 
         // --- ÁNH XẠ NÚT CHỌN MÀU ---
         btnColorPicker = findViewById(R.id.imageButton4) // ID từ file XML
+        // --- ÁNH XẠ THANH TRƯỢT ĐỘ SÁNG ---
+        seekBarBrightness = findViewById(R.id.seekBarBrightness)
 
         sessionManager = SessionManager(applicationContext)
 
@@ -90,17 +88,24 @@ class DashboardActivity : AppCompatActivity() {
             showColorBrightnessPicker(token)
         }
 
-        // --- THÊM LOGIC XỬ LÝ SWITCH ---
-//        swLight.setOnCheckedChangeListener { _, isChecked ->
-//            // isChecked sẽ là 'true' nếu bật, 'false' nếu tắt
-//            sendLightControl(token, isChecked)
-//        }
+        // --- XỬ LÝ SỰ KIỆN CHO THANH TRƯỢT ĐỘ SÁNG ---
+        seekBarBrightness.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                // (Không làm gì khi đang kéo để tránh spam lệnh)
+            }
 
-        // THÊM LISTENER CHO CÁC NÚT MÀU
-//        btnRed.setOnClickListener { sendColorControl(token, "#FF0000") } // Gửi mã hex
-//        btnGreen.setOnClickListener { sendColorControl(token, "#00FF00") }
-//        btnOff.setOnClickListener { sendColorControl(token, "#000000") } // Màu đen = Tắt
-//        btnColorSubmit.setOnClickListener {sendColorControl(token, edtColorCode.text.toString())}
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+                // (Không cần làm gì)
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                // Chỉ gửi lệnh khi người dùng nhả tay
+                val brightness = seekBar?.progress ?: 50 // Lấy giá trị (0-255)
+                Log.d("DashboardActivity", "Gửi độ sáng: $brightness")
+                sendBrightnessControl(token, brightness)
+            }
+        })
+
     }
 
     // --- HÀM MỚI ĐỂ HIỂN THỊ BẢNG CHỌN MÀU VÀ ĐỘ SÁNG ---
@@ -153,6 +158,32 @@ class DashboardActivity : AppCompatActivity() {
                 launch(Dispatchers.Main) {
                     Toast.makeText(this@DashboardActivity, "Lỗi kết nối", Toast.LENGTH_SHORT).show()
                 }
+            }
+        }
+    }
+
+    private fun sendBrightnessControl(token: String, brightness: Int) {
+        // brightness là giá trị từ 0-255
+        val rpcRequest = RpcRequest(
+            method = "setBrightness", // Phải khớp với method trong code ESP32
+            params = brightness.toString() // Gửi giá trị dưới dạng chuỗi
+        )
+
+        lifecycleScope.launch(Dispatchers.IO) {
+            try {
+                val response = RetrofitClient.instance.sendRpcRequest(
+                    token = "Bearer $token",
+                    deviceId = DEVICE_ID,
+                    request = rpcRequest
+                )
+
+                if (response.isSuccessful) {
+                    Log.d("DashboardActivity", "Gửi lệnh setBrightness ($brightness) thành công!")
+                } else {
+                    Log.e("DashboardActivity", "Gửi RPC setBrightness thất bại: ${response.code()}")
+                }
+            } catch (e: Exception) {
+                Log.e("DashboardActivity", "Lỗi khi gửi RPC setBrightness: ${e.message}", e)
             }
         }
     }

@@ -157,6 +157,33 @@
         app:lottie_rawRes="@raw/fish"
         tools:src="@android:color/holo_blue_light" />
 
+    <LinearLayout
+        android:id="@+id/layoutBrightness"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/layoutControls"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivFishTank"
+        app:layout_constraintVertical_weight="0.5"> <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Độ sáng:"
+        android:textColor="@android:color/black"
+        android:textSize="16sp" />
+
+        <SeekBar
+            android:id="@+id/seekBarBrightness"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:max="255"
+            android:progress="50" /> </LinearLayout>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layoutControls"
         android:layout_width="0dp"
