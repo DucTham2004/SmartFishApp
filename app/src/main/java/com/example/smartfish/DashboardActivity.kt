@@ -1,5 +1,6 @@
 package com.example.smartfish
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
@@ -43,6 +44,7 @@ class DashboardActivity : AppCompatActivity() {
 
     // --- THÊM BIẾN CHO NÚT MÀU ---
     private lateinit var btnColorPicker: ImageButton
+    private lateinit var btnChart: ImageButton
 
 
     private lateinit var sessionManager: SessionManager
@@ -86,6 +88,11 @@ class DashboardActivity : AppCompatActivity() {
         // --- XỬ LÝ SỰ KIỆN CLICK CHO NÚT CHỌN MÀU ---
         btnColorPicker.setOnClickListener {
             showColorBrightnessPicker(token)
+        }
+        btnChart = findViewById(R.id.imageButton6)
+        btnChart.setOnClickListener {
+            val intent = Intent(this, ChartActivity::class.java)
+            startActivity(intent)
         }
 
         // --- XỬ LÝ SỰ KIỆN CHO THANH TRƯỢT ĐỘ SÁNG ---

@@ -37,8 +37,8 @@ android {
 }
 
 dependencies {
-
-    implementation("androidx.core:core-ktx:1.12.0")
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
+    implementation("androidx.core:core-ktx:1.10.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.13.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
@@ -51,7 +51,8 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
     implementation("com.github.Dhaval2404:ColorPicker:2.3")
     implementation("com.airbnb.android:lottie:6.4.0")
-    implementation("androidx.activity:activity-ktx:1.9.0") //Or your desired OkHttp 4.x version
+    implementation("androidx.activity:activity-ktx:1.10.0")
+    implementation("androidx.activity:activity:1.10.0") //Or your desired OkHttp 4.x version
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")

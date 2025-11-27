@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AgentMigrationStateService">
+    <option name="pendingSessionIds">
+      <option value="25c9d5a0-6226-4497-b26e-1d8cef687ff9" />
+    </option>
+    <option name="pendingTurns">
+      <map>
+        <entry key="25c9d5a0-6226-4497-b26e-1d8cef687ff9">
+          <value>
+            <set>
+              <option value="9f851437-db76-4bab-a05a-0a7a57dfdc5f" />
+              <option value="e96d8977-0d2f-4668-852c-85810b4c9673" />
+            </set>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <pendingWorkingSetItems>
+      <entry key="25c9d5a0-6226-4497-b26e-1d8cef687ff9">
+        <set>
+          <option value="file://$PROJECT_DIR$/app/src/main/res/layout/activity_chart.xml" />
+          <option value="file://$PROJECT_DIR$/app/src/main/java/com/example/smartfish/ChartActivity.kt" />
+        </set>
+      </entry>
+      <entry key="44d88448-079b-47c7-9127-73dd4528c67e">
+        <set>
+          <option value="file://$PROJECT_DIR$/CHART_QUICK_REFERENCE.md" />
+          <option value="file://$PROJECT_DIR$/CHART_REBUILD_SUMMARY.md" />
+        </set>
+      </entry>
+    </pendingWorkingSetItems>
+  </component>
+</project>
