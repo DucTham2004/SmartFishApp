@@ -41,6 +41,7 @@ class DashboardActivity : AppCompatActivity() {
     private lateinit var tvWaterLevel: TextView
     private lateinit var seekBarBrightness: SeekBar
     private lateinit var dotLottieAnimationView: LottieAnimationView
+    private lateinit var btnFeed: ImageButton
 
     // --- THÊM BIẾN CHO NÚT MÀU ---
     private lateinit var btnColorPicker: ImageButton
@@ -68,6 +69,7 @@ class DashboardActivity : AppCompatActivity() {
 
         // --- ÁNH XẠ NÚT CHỌN MÀU ---
         btnColorPicker = findViewById(R.id.imageButton4) // ID từ file XML
+        btnFeed = findViewById(R.id.imageButton5)
         // --- ÁNH XẠ THANH TRƯỢT ĐỘ SÁNG ---
         seekBarBrightness = findViewById(R.id.seekBarBrightness)
 
@@ -88,6 +90,12 @@ class DashboardActivity : AppCompatActivity() {
         // --- XỬ LÝ SỰ KIỆN CLICK CHO NÚT CHỌN MÀU ---
         btnColorPicker.setOnClickListener {
             showColorBrightnessPicker(token)
+        }
+        // --- XỬ LÝ SỰ KIỆN NÚT CHO CÁ ĂN ---
+        btnFeed.setOnClickListener {
+            // Hiệu ứng Toast báo người dùng biết đã bấm
+            Toast.makeText(this, "Đang gửi lệnh cho ăn...", Toast.LENGTH_SHORT).show()
+            sendFeedControl(token)
         }
         btnChart = findViewById(R.id.imageButton6)
         btnChart.setOnClickListener {
@@ -216,6 +224,39 @@ class DashboardActivity : AppCompatActivity() {
                 }
             } catch (e: Exception) {
                 Log.e("DashboardActivity", "Lỗi khi gửi RPC setColor: ${e.message}", e)
+            }
+        }
+    }
+
+    // --- HÀM MỚI: GỬI LỆNH CHO CÁ ĂN ---
+    private fun sendFeedControl(token: String) {
+        // Tạo request RPC
+        val rpcRequest = RpcRequest(
+            method = "feedFish", // Tên method phải khớp với code ESP32
+            params = "true"      // Giá trị tham số (không quan trọng lắm trong trường hợp này)
+        )
+
+        lifecycleScope.launch(Dispatchers.IO) {
+            try {
+                val response = RetrofitClient.instance.sendRpcRequest(
+                    token = "Bearer $token",
+                    deviceId = DEVICE_ID,
+                    request = rpcRequest
+                )
+
+                if (response.isSuccessful) {
+                    Log.d("DashboardActivity", "Gửi lệnh feedFish thành công!")
+                    launch(Dispatchers.Main) {
+                        Toast.makeText(this@DashboardActivity, "Đã cho cá ăn! 🐟", Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+                    Log.e("DashboardActivity", "Gửi RPC feedFish thất bại: ${response.code()}")
+                    launch(Dispatchers.Main) {
+                        Toast.makeText(this@DashboardActivity, "Lỗi kết nối thiết bị", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            } catch (e: Exception) {
+                Log.e("DashboardActivity", "Lỗi khi gửi RPC feedFish: ${e.message}", e)
             }
         }
     }

@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="AgentMigrationStateService">
+    <option name="migrationStatus" value="IN_PROGRESS" />
     <option name="pendingSessionIds">
       <option value="25c9d5a0-6226-4497-b26e-1d8cef687ff9" />
+      <option value="264e1a35-b232-4be2-a18d-e807c3c115a2" />
+      <option value="32f24067-714e-4446-b7eb-290b61e38bab" />
+      <option value="6c8e0070-d70a-4bf7-9f6a-ebf0cac798ca" />
+      <option value="da770c38-8de9-4994-96ea-a770e509f6fd" />
     </option>
     <option name="pendingTurns">
       <map>
         <entry key="25c9d5a0-6226-4497-b26e-1d8cef687ff9">
           <value>
             <set>
+              <option value="196e314b-cf37-4e0a-96df-d551f7875cb6" />
+              <option value="459d478d-281d-4208-8a45-2bda2ad62102" />
+              <option value="4ab48184-5490-4779-bf87-4eff6dfea23f" />
               <option value="9f851437-db76-4bab-a05a-0a7a57dfdc5f" />
               <option value="e96d8977-0d2f-4668-852c-85810b4c9673" />
             </set>
@@ -17,18 +25,8 @@
       </map>
     </option>
     <pendingWorkingSetItems>
-      <entry key="25c9d5a0-6226-4497-b26e-1d8cef687ff9">
-        <set>
-          <option value="file://$PROJECT_DIR$/app/src/main/res/layout/activity_chart.xml" />
-          <option value="file://$PROJECT_DIR$/app/src/main/java/com/example/smartfish/ChartActivity.kt" />
-        </set>
-      </entry>
-      <entry key="44d88448-079b-47c7-9127-73dd4528c67e">
-        <set>
-          <option value="file://$PROJECT_DIR$/CHART_QUICK_REFERENCE.md" />
-          <option value="file://$PROJECT_DIR$/CHART_REBUILD_SUMMARY.md" />
-        </set>
-      </entry>
+      <entry key="25c9d5a0-6226-4497-b26e-1d8cef687ff9" />
+      <entry key="44d88448-079b-47c7-9127-73dd4528c67e" />
     </pendingWorkingSetItems>
   </component>
 </project>
