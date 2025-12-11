@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Primary Colors -->
+    <color name="primary">#64B5F6</color>
+    <color name="primary_light">#90CAF9</color>
+    <color name="primary_dark">#42A5F5</color>
+
+    <!-- Background Colors -->
+    <color name="background_start">#0D1B2A</color>
+    <color name="background_center">#1B263B</color>
+    <color name="background_end">#415A77</color>
+
+    <!-- Sensor Card Colors -->
+    <color name="water_level_primary">#64B5F6</color>
+    <color name="water_level_secondary">#90CAF9</color>
+    <color name="humidity_primary">#81C784</color>
+    <color name="humidity_secondary">#A5D6A7</color>
+    <color name="temperature_primary">#FFB74D</color>
+    <color name="temperature_secondary">#FFCC80</color>
+
+    <!-- Text Colors -->
+    <color name="text_primary">#ECEFF4</color>
+    <color name="text_secondary">#A8B8C8</color>
+    <color name="text_hint">#6C7B8B</color>
+
+    <!-- Accent Colors -->
+    <color name="accent_yellow">#FFD54F</color>
+    <color name="accent_yellow_light">#FFE082</color>
+
+    <!-- Card Colors -->
+    <color name="card_background">#1F2937</color>
+    <color name="card_stroke">#374151</color>
+
+    <!-- Fish Tank Colors -->
+    <color name="fish_tank_start">#1F3A5F</color>
+    <color name="fish_tank_center">#2E5A88</color>
+    <color name="fish_tank_end">#3D7AB1</color>
+    <color name="fish_tank_stroke">#4A8BC2</color>
+</resources>
+

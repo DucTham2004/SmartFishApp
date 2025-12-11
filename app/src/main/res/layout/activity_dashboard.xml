@@ -4,256 +4,410 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
     android:fitsSystemWindows="true"
-    android:padding="16dp"
     tools:context=".DashboardActivity">
 
+    <!-- Header Title -->
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="🐟 Smart Fish Tank"
+        android:textColor="@color/text_primary"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif-medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvSubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Monitor and control your aquarium"
+        android:textColor="@color/text_secondary"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+
+    <!-- Sensor Cards Container -->
     <LinearLayout
         android:id="@+id/layoutSensors"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="20dp"
         android:gravity="center"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/ivFishTank"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_weight="0.3">
+        app:layout_constraintTop_toBottomOf="@id/tvSubtitle">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="0"
-            android:orientation="horizontal">
+        <!-- Water Level Card -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="6dp"
+            app:cardBackgroundColor="@android:color/transparent"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="8dp">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="0">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/card_sensor_water"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="12dp">
 
                 <ImageView
                     android:id="@+id/imageView4"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0"
-                    app:layout_constraintDimensionRatio="1:1"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/high" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/high"
+                    android:contentDescription="Water Level Icon" />
 
-            <TextView
-                android:id="@+id/tvWaterLevel"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_weight="0"
-                android:gravity="center"
-                android:text="100 cm"
-                android:textAlignment="center"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/tvWaterLevel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="100"
+                    android:textColor="@color/water_level_primary"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
-        </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="cm"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="12sp" />
 
-        <View
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Water Level"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Humidity Card -->
+        <androidx.cardview.widget.CardView
             android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_weight="1" />
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="6dp"
+            app:cardBackgroundColor="@android:color/transparent"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="8dp">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="0"
-            android:orientation="horizontal">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="0">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/card_sensor_humidity"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="12dp">
 
                 <ImageView
                     android:id="@+id/imageView6"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0"
-                    app:layout_constraintDimensionRatio="1:1"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/humidity" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/humidity"
+                    android:contentDescription="Humidity Icon" />
 
-            <TextView
-                android:id="@+id/tvHumidity"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_weight="0"
-                android:gravity="center"
-                android:text="55 %"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/tvHumidity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="55"
+                    android:textColor="@color/humidity_primary"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
-        </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="%"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="12sp" />
 
-        <View
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Humidity"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Temperature Card -->
+        <androidx.cardview.widget.CardView
             android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_weight="1" />
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="6dp"
+            app:cardBackgroundColor="@android:color/transparent"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="8dp">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="0"
-            android:orientation="horizontal">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="0">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/card_sensor_temperature"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="12dp">
 
                 <ImageView
                     android:id="@+id/imageView3"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0"
-                    app:layout_constraintDimensionRatio="1:1"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/hot" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/hot"
+                    android:contentDescription="Temperature Icon" />
 
-            <TextView
-                android:id="@+id/tvTemperature"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_weight="0"
-                android:gravity="center"
-                android:text="60 C"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/tvTemperature"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="26"
+                    android:textColor="@color/temperature_primary"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
-        </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="°C"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Temperature"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
     </LinearLayout>
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/ivFishTank"
+    <!-- Fish Tank Animation Container -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardFishTank"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="16dp"
-        android:contentDescription="Hình ảnh bể cá"
-        app:layout_constraintBottom_toTopOf="@+id/layoutBrightness"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:cardCornerRadius="32dp"
+        app:cardElevation="12dp"
+        app:layout_constraintBottom_toTopOf="@id/layoutBrightness"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layoutSensors"
-        app:layout_constraintVertical_bias="1.0"
-        app:layout_constraintVertical_weight="6"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/fish"
-        tools:src="@android:color/holo_blue_light" />
+        app:layout_constraintTop_toBottomOf="@id/layoutSensors"
+        app:layout_constraintVertical_weight="1">
 
-    <LinearLayout
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/fish_tank_background">
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/ivFishTank"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="Fish Tank Animation"
+                android:scaleType="centerCrop"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/fish" />
+
+            <!-- Status Badge -->
+            <TextView
+                android:id="@+id/tvStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|end"
+                android:layout_margin="12dp"
+                android:background="@drawable/status_message_background"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="6dp"
+                android:text="● Online"
+                android:textColor="#4CAF50"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </FrameLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Brightness Control Card -->
+    <androidx.cardview.widget.CardView
         android:id="@+id/layoutBrightness"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:paddingHorizontal="16dp"
-        android:layout_marginTop="16dp" android:layout_marginBottom="16dp" app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivFishTank"
-        app:layout_constraintBottom_toTopOf="@+id/layoutControls">
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="16dp"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="8dp"
+        app:layout_constraintBottom_toTopOf="@id/layoutControls"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
-        <ImageView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:contentDescription="Độ sáng thấp"
-            android:src="@drawable/baseline_brightness_low_24"
-            app:tint="#FFEB3B" />
+            android:background="@drawable/brightness_card_background"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="16dp">
 
-        <SeekBar
-            android:id="@+id/seekBarBrightness"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_weight="1"
-            android:max="255"
-            android:progress="50" />
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:contentDescription="Low Brightness"
+                android:src="@drawable/baseline_brightness_low_24"
+                app:tint="@color/accent_yellow" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="Độ sáng cao"
-            android:src="@drawable/baseline_brightness_high_24"
-            app:tint="#FFEB3B" />
-    </LinearLayout>
+            <SeekBar
+                android:id="@+id/seekBarBrightness"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_weight="1"
+                android:max="255"
+                android:progress="50"
+                android:progressDrawable="@drawable/seekbar_progress"
+                android:thumb="@drawable/seekbar_thumb" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:contentDescription="High Brightness"
+                android:src="@drawable/baseline_brightness_high_24"
+                app:tint="@color/accent_yellow" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Control Buttons Container -->
+    <LinearLayout
         android:id="@+id/layoutControls"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:fillViewport="true"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="24dp"
+        android:gravity="center"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layoutBrightness"
-        app:layout_constraintVertical_weight="1">
+        app:layout_constraintStart_toStartOf="parent">
 
-        <ImageButton
-            android:id="@+id/imageButton6"
+        <!-- Refresh Button -->
+        <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
 
-            app:layout_constraintHeight_percent="0.5"
+            <ImageButton
+                android:id="@+id/imageButton6"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:background="@drawable/control_button_background"
+                android:contentDescription="Refresh"
+                android:elevation="4dp"
+                android:padding="14dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/refresh"
+                app:tint="@color/primary" />
 
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:scaleType="centerInside"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintEnd_toStartOf="@+id/imageButton5"
-            app:layout_constraintHorizontal_chainStyle="spread"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/refresh" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Refresh"
+                android:textColor="@color/text_secondary"
+                android:textSize="12sp" />
+        </LinearLayout>
 
-        <ImageButton
-            android:id="@+id/imageButton5"
+        <!-- Play/Pause Button (Primary) -->
+        <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
 
-            app:layout_constraintHeight_percent="1.0"
+            <ImageButton
+                android:id="@+id/imageButton5"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:background="@drawable/control_button_primary"
+                android:contentDescription="Feed Fish"
+                android:elevation="8dp"
+                android:padding="18dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/play"
+                app:tint="@color/white" />
 
-            android:scaleType="centerInside"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintEnd_toStartOf="@+id/imageButton4"
-            app:layout_constraintStart_toEndOf="@+id/imageButton6"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/play" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Feed"
+                android:textColor="@color/text_secondary"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </LinearLayout>
 
-        <ImageButton
-            android:id="@+id/imageButton4"
+        <!-- Color Button -->
+        <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
 
-            app:layout_constraintHeight_percent="0.5"
+            <ImageButton
+                android:id="@+id/imageButton4"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:background="@drawable/control_button_background"
+                android:contentDescription="Change Color"
+                android:elevation="4dp"
+                android:padding="14dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/color"
+                app:tint="@color/primary" />
 
-            android:scaleType="centerInside"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/imageButton5"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/color" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Color"
+                android:textColor="@color/text_secondary"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
