@@ -27,11 +27,24 @@ import android.widget.EditText
 import com.airbnb.lottie.LottieAnimationView
 import kotlin.math.roundToInt
 
-// --- THÊM CÁC IMPORT NÀY ---
+
 import android.widget.ImageButton
 import com.github.dhaval2404.colorpicker.MaterialColorPickerDialog
 import com.github.dhaval2404.colorpicker.model.ColorShape
 import com.github.dhaval2404.colorpicker.listener.ColorListener
+
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Context
+import android.os.Build
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
+import android.Manifest
+import android.content.pm.PackageManager
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+
 // --- KẾT THÚC THÊM IMPORT ---
 
 class DashboardActivity : AppCompatActivity() {
@@ -57,6 +70,18 @@ class DashboardActivity : AppCompatActivity() {
 
     private val DEVICE_ID = "c145a050-b3df-11f0-bda8-9b2f0923971f" // <-- DÁN LẠI DEVICE ID VÀO ĐÂY
 
+    // --- CẤU HÌNH NGƯỠNG CẢNH BÁO ---
+    private val TEMP_MAX = 32.0f
+    private val TEMP_MIN = 20.0f
+    private val WATER_LEVEL_MIN = 10.0f // cm
+    private val WATER_LEVEL_MAX = 150.0f // cm
+
+    // --- BIẾN TRÁNH SPAM THÔNG BÁO (COOLDOWN) ---
+    private var lastAlertTime = 0L
+    private val ALERT_COOLDOWN = 60000L // 60 giây mới báo 1 lần nếu vẫn lỗi
+    private val CHANNEL_ID = "SMART_FISH_ALERTS"
+    private val NOTIFICATION_ID = 100
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
@@ -72,6 +97,13 @@ class DashboardActivity : AppCompatActivity() {
         btnFeed = findViewById(R.id.imageButton5)
         // --- ÁNH XẠ THANH TRƯỢT ĐỘ SÁNG ---
         seekBarBrightness = findViewById(R.id.seekBarBrightness)
+
+
+        // 1. Tạo kênh thông báo
+        createNotificationChannel()
+
+        // 2. Xin quyền thông báo (Android 13+)
+        checkNotificationPermission()
 
         sessionManager = SessionManager(applicationContext)
 
@@ -356,6 +388,7 @@ class DashboardActivity : AppCompatActivity() {
                             val waterLevel = extractValue(telemetryDataElement, "mucNuoc_cm")?.toFloatOrNull() // <-- LẤY DỮ LIỆU MỚI
                             // === KẾT THÚC PHẦN SỬA ===
 
+                            checkAndNotify(temp, waterLevel) // <-- KIỂM TRA VÀ GỬI THÔNG BÁO
                             // 3. Cập nhật UI (giữ nguyên)
                             lifecycleScope.launch(Dispatchers.Main) {
                                 temp?.let { tvTemperature.text = "${it.roundToInt()} °C" }
@@ -393,4 +426,97 @@ class DashboardActivity : AppCompatActivity() {
         webSocket?.close(1000, "Activity bị hủy")
         client.dispatcher.executorService.shutdown()
     }
+
+    private fun createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = "Cảnh báo hồ cá"
+            val descriptionText = "Thông báo khi nhiệt độ hoặc mực nước bất thường"
+            val importance = NotificationManager.IMPORTANCE_HIGH
+            val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
+                description = descriptionText
+                enableVibration(true)
+            }
+            // Đăng ký kênh với hệ thống
+            val notificationManager: NotificationManager =
+                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
+    }
+
+    // --- HÀM XIN QUYỀN (ANDROID 13+) ---
+    private fun checkNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) !=
+                PackageManager.PERMISSION_GRANTED
+            ) {
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(Manifest.permission.POST_NOTIFICATIONS),
+                    101
+                )
+            }
+        }
+    }
+
+    // --- HÀM KIỂM TRA NGƯỠNG VÀ GỬI THÔNG BÁO ---
+    private fun checkAndNotify(temp: Float?, waterLevel: Float?) {
+        val currentTime = System.currentTimeMillis()
+
+        // Nếu chưa hết thời gian chờ (60s) thì không làm gì cả để tránh spam
+        if (currentTime - lastAlertTime < ALERT_COOLDOWN) return
+
+        var alertMessage = ""
+
+        // Kiểm tra nhiệt độ
+        if (temp != null) {
+            if (temp > TEMP_MAX) alertMessage += "🔥 Nước quá nóng: $temp°C! "
+            else if (temp < TEMP_MIN) alertMessage += "❄️ Nước quá lạnh: $temp°C! "
+        }
+
+        // Kiểm tra mực nước
+        if (waterLevel != null) {
+            if (waterLevel < WATER_LEVEL_MIN) alertMessage += "⚠️ Hết nước: ${waterLevel}cm! "
+            else if (waterLevel > WATER_LEVEL_MAX) alertMessage += "🌊 Tràn nước: ${waterLevel}cm! "
+        }
+
+        // Nếu có cảnh báo
+        if (alertMessage.isNotEmpty()) {
+            sendNotification(alertMessage)
+            lastAlertTime = currentTime // Cập nhật thời gian đã báo
+        }
+    }
+
+    // --- HÀM GỬI THÔNG BÁO RA MÀN HÌNH ---
+    private fun sendNotification(message: String) {
+        // Intent để khi bấm vào thông báo sẽ mở lại Dashboard
+        val intent = Intent(this, DashboardActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
+        val pendingIntent: PendingIntent = PendingIntent.getActivity(
+            this, 0, intent, PendingIntent.FLAG_IMMUTABLE
+        )
+
+        val builder = NotificationCompat.Builder(this, CHANNEL_ID)
+            .setSmallIcon(R.drawable.applogo) // Đảm bảo icon này tồn tại
+            .setContentTitle("Cảnh báo SmartFish! 🐟")
+            .setContentText(message)
+            .setStyle(NotificationCompat.BigTextStyle().bigText(message)) // Để hiện text dài
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setContentIntent(pendingIntent)
+            .setAutoCancel(true)
+
+        try {
+            if (ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.POST_NOTIFICATIONS
+                ) == PackageManager.PERMISSION_GRANTED
+            ) {
+                NotificationManagerCompat.from(this).notify(NOTIFICATION_ID, builder.build())
+            }
+        } catch (e: Exception) {
+            Log.e("Notification", "Lỗi gửi thông báo: ${e.message}")
+        }
+    }
 }
+
+// --- HÀM TẠO KÊNH THÔNG BÁO (BẮT BUỘC) ---
