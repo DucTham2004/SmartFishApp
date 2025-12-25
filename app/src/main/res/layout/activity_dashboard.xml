@@ -8,6 +8,22 @@
     android:fitsSystemWindows="true"
     tools:context=".DashboardActivity">
 
+    <!-- Settings Button -->
+    <ImageButton
+        android:id="@+id/btnSettings"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/control_button_background"
+        android:contentDescription="Settings"
+        android:padding="8dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/baseline_settings_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/primary" />
+
     <!-- Header Title -->
     <TextView
         android:id="@+id/tvTitle"

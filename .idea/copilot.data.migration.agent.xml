@@ -3,16 +3,26 @@
   <component name="AgentMigrationStateService">
     <option name="migrationStatus" value="IN_PROGRESS" />
     <option name="pendingSessionIds">
+      <option value="01ae2f68-d1da-47fa-8522-b29043525171" />
+      <option value="05de926d-9302-4d79-9c4f-9d15567e63f7" />
+      <option value="145fb991-ab64-4a71-a9f3-9816a51d4b2a" />
       <option value="23dbc735-8c1e-46f1-8668-ebceac8945ca" />
       <option value="25c9d5a0-6226-4497-b26e-1d8cef687ff9" />
       <option value="264e1a35-b232-4be2-a18d-e807c3c115a2" />
       <option value="32f24067-714e-4446-b7eb-290b61e38bab" />
+      <option value="426273d2-a472-4070-b37c-4f39bf737447" />
+      <option value="45f928d4-da90-4376-84dc-1ee705e55e1e" />
+      <option value="4ccfdb74-63af-4da4-ae9e-2964e82cc339" />
+      <option value="52e52507-d7a1-4bc7-88b3-88038cd24796" />
       <option value="5e6bba47-4561-4de3-a2c5-71d7d543cd88" />
       <option value="6c8e0070-d70a-4bf7-9f6a-ebf0cac798ca" />
+      <option value="7887d0d7-75de-4ce1-a9d0-1619e1dcb1ab" />
       <option value="93281bf6-c531-4ae3-857d-e0da851170b3" />
       <option value="93cfd834-9bea-4b92-962f-fdb95de5a3c0" />
+      <option value="bc138fbd-1fab-4371-aa30-aa3a034b35ae" />
       <option value="da770c38-8de9-4994-96ea-a770e509f6fd" />
       <option value="e54a63d9-eb1f-466e-af7f-8b4dc924d1a8" />
+      <option value="fc7ed4d1-f7f4-4144-965b-6dd477a8a60a" />
     </option>
     <option name="pendingTurns">
       <map>
@@ -30,8 +40,9 @@
         <entry key="5e6bba47-4561-4de3-a2c5-71d7d543cd88">
           <value>
             <set>
-              <option value="80ade31d-63c5-4e00-8a3f-07c6fde848ff" />
+              <option value="3bada501-664b-4512-8b9d-b17401483d9b" />
               <option value="3d2c2cb4-fe8f-4db6-ad60-b3d153441aa2" />
+              <option value="80ade31d-63c5-4e00-8a3f-07c6fde848ff" />
             </set>
           </value>
         </entry>
@@ -47,45 +58,7 @@
     <pendingWorkingSetItems>
       <entry key="25c9d5a0-6226-4497-b26e-1d8cef687ff9" />
       <entry key="44d88448-079b-47c7-9127-73dd4528c67e" />
-      <entry key="5e6bba47-4561-4de3-a2c5-71d7d543cd88">
-        <set>
-          <option value="file://$PROJECT_DIR$/app/src/main/res/drawable/card_sensor_background.xml" />
-          <option value="file://$PROJECT_DIR$/app/src/main/res/drawable/card_sensor_water.xml" />
-          <option value="file://$PROJECT_DIR$/app/src/main/res/drawable/card_sensor_humidity.xml" />
-          <option value="file://$PROJECT_DIR$/app/src/main/res/drawable/card_sensor_temperature.xml" />
-          <option value="file://$PROJECT_DIR$/app/src/main/res/drawable/fish_tank_background.xml" />
-          <option value="file://$PROJECT_DIR$/app/src/main/res/drawable/control_button_background.xml" />
-          <option value="file://$PROJECT_DIR$/app/src/main/res/drawable/control_button_primary.xml" />
-          <option value="file://$PROJECT_DIR$/app/src/main/res/drawable/seekbar_thumb.xml" />
-          <option value="file://$PROJECT_DIR$/app/src/main/res/drawable/seekbar_progress.xml" />
-          <option value="file://$PROJECT_DIR$/app/src/main/res/drawable/brightness_card_background.xml" />
-          <option value="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
-          <option value="file://$PROJECT_DIR$/app/src/main/res/layout/activity_dashboard.xml" />
-          <option value="file://$PROJECT_DIR$/app/src/main/res/drawable/status_message_background.xml" />
-          <option value="file://$PROJECT_DIR$/app/src/main/res/drawable/gradient_background.xml" />
-          <option value="file://$PROJECT_DIR$/app/src/main/res/values-night/colors.xml" />
-          <option value="file://$PROJECT_DIR$/app/src/main/res/drawable-night/gradient_background.xml" />
-          <option value="file://$PROJECT_DIR$/app/src/main/res/drawable-night/card_sensor_water.xml" />
-          <option value="file://$PROJECT_DIR$/app/src/main/res/drawable-night/card_sensor_humidity.xml" />
-          <option value="file://$PROJECT_DIR$/app/src/main/res/drawable-night/card_sensor_temperature.xml" />
-          <option value="file://$PROJECT_DIR$/app/src/main/res/drawable-night/fish_tank_background.xml" />
-          <option value="file://$PROJECT_DIR$/app/src/main/res/drawable-night/brightness_card_background.xml" />
-          <option value="file://$PROJECT_DIR$/app/src/main/res/drawable-night/control_button_background.xml" />
-          <option value="file://$PROJECT_DIR$/app/src/main/res/drawable-night/status_message_background.xml" />
-          <option value="file://$PROJECT_DIR$/app/src/main/res/anim/scale_fade_in.xml" />
-          <option value="file://$PROJECT_DIR$/app/src/main/res/anim/slide_up.xml" />
-          <option value="file://$PROJECT_DIR$/app/src/main/res/anim/button_press.xml" />
-          <option value="file://$PROJECT_DIR$/app/src/main/res/anim/button_release.xml" />
-          <option value="file://$PROJECT_DIR$/app/src/main/res/anim/rotate_refresh.xml" />
-          <option value="file://$PROJECT_DIR$/app/src/main/res/drawable/login_card_background.xml" />
-          <option value="file://$PROJECT_DIR$/app/src/main/res/drawable/login_button_background.xml" />
-          <option value="file://$PROJECT_DIR$/app/src/main/res/drawable/logo_circle_background.xml" />
-          <option value="file://$PROJECT_DIR$/app/src/main/res/drawable-night/login_card_background.xml" />
-          <option value="file://$PROJECT_DIR$/app/src/main/res/drawable-night/login_button_background.xml" />
-          <option value="file://$PROJECT_DIR$/app/src/main/res/drawable-night/logo_circle_background.xml" />
-          <option value="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
-        </set>
-      </entry>
+      <entry key="5e6bba47-4561-4de3-a2c5-71d7d543cd88" />
     </pendingWorkingSetItems>
   </component>
 </project>

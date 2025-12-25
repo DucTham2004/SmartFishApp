@@ -34,7 +34,7 @@ class ChartActivity : AppCompatActivity() {
     private lateinit var tvHumidAvg: TextView
 
     // Dùng lại DEVICE_ID giống trong DashboardActivity
-    private val DEVICE_ID = "c145a050-b3df-11f0-bda8-9b2f0923971f"
+    private val DEVICE_ID = "1c881950-d89a-11f0-a9c3-a94cc0e19399"
 
     // Enum để quản lý khoảng thời gian
     private enum class TimePeriod(val days: Int, val label: String) {

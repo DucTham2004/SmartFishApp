@@ -19,11 +19,7 @@ import okhttp3.Response
 import okhttp3.WebSocket
 import okhttp3.WebSocketListener
 import kotlinx.serialization.json.JsonArray
-import com.google.android.material.switchmaterial.SwitchMaterial
-import android.widget.CompoundButton
 import android.widget.Toast
-import android.widget.Button
-import android.widget.EditText
 import com.airbnb.lottie.LottieAnimationView
 import kotlin.math.roundToInt
 
@@ -68,7 +64,7 @@ class DashboardActivity : AppCompatActivity() {
     // Định nghĩa JSON parser (từ kotlinx.serialization)
     private val json = Json { ignoreUnknownKeys = true }
 
-    private val DEVICE_ID = "c145a050-b3df-11f0-bda8-9b2f0923971f" // <-- DÁN LẠI DEVICE ID VÀO ĐÂY
+    private val DEVICE_ID = "1c881950-d89a-11f0-a9c3-a94cc0e19399" // <-- DÁN LẠI DEVICE ID VÀO ĐÂY
 
     // --- CẤU HÌNH NGƯỠNG CẢNH BÁO ---
     private val TEMP_MAX = 32.0f
@@ -86,6 +82,12 @@ class DashboardActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
 
+        // Trong DashboardActivity.kt, thêm vào onCreate():
+        val btnSettings: ImageButton = findViewById(R.id.btnSettings)
+        btnSettings.setOnClickListener {
+            val intent = Intent(this, SettingsActivity::class.java)
+            startActivity(intent)
+        }
         tvTemperature = findViewById(R.id.tvTemperature)
         tvHumidity = findViewById(R.id.tvHumidity)
         tvWaterLevel = findViewById(R.id.tvWaterLevel)
