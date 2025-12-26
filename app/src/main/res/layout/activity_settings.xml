@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
@@ -26,8 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             app:cardCornerRadius="12dp"
-            app:cardElevation="4dp"
-            xmlns:app="http://schemas.android.com/apk/res-auto">
+            app:cardElevation="4dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -49,15 +49,54 @@
                     android:text="Khoảng cách từ cảm biến đến đáy bể (cm)"
                     android:textSize="12sp"
                     android:textColor="#757575"
-                    android:layout_marginBottom="8dp"/>
+                    android:layout_marginBottom="12dp"/>
 
-                <EditText
-                    android:id="@+id/etTankHeight"
+                <!-- Number Picker cho độ cao bể cá -->
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="numberDecimal"
-                    android:hint="Ví dụ: 30.0"
-                    android:background="@drawable/edit_text_background"/>
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:background="@drawable/edit_text_background"
+                    android:padding="8dp">
+
+                    <Button
+                        android:id="@+id/btnTankHeightMinus"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:text="−"
+                        android:textSize="24sp"
+                        android:textColor="#FFFFFF"
+                        android:backgroundTint="#E53935"/>
+
+                    <TextView
+                        android:id="@+id/tvTankHeight"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="30"
+                        android:textSize="32sp"
+                        android:textStyle="bold"
+                        android:textColor="#333333"
+                        android:gravity="center"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="cm"
+                        android:textSize="18sp"
+                        android:textColor="#757575"
+                        android:layout_marginEnd="16dp"/>
+
+                    <Button
+                        android:id="@+id/btnTankHeightPlus"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:text="+"
+                        android:textSize="24sp"
+                        android:textColor="#FFFFFF"
+                        android:backgroundTint="#43A047"/>
+                </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
@@ -67,8 +106,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             app:cardCornerRadius="12dp"
-            app:cardElevation="4dp"
-            xmlns:app="http://schemas.android.com/apk/res-auto">
+            app:cardElevation="4dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -88,8 +126,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="8dp">
+                    android:layout_marginTop="12dp">
 
+                    <!-- Bật sưởi khi -->
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -102,17 +141,49 @@
                             android:layout_height="wrap_content"
                             android:text="Bật sưởi khi &lt; (°C)"
                             android:textSize="12sp"
-                            android:textColor="#757575"/>
+                            android:textColor="#757575"
+                            android:layout_marginBottom="8dp"/>
 
-                        <EditText
-                            android:id="@+id/etHeaterOn"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="numberDecimal"
-                            android:hint="28.5"
-                            android:background="@drawable/edit_text_background"/>
+                            android:orientation="horizontal"
+                            android:gravity="center"
+                            android:background="@drawable/edit_text_background"
+                            android:padding="4dp">
+
+                            <Button
+                                android:id="@+id/btnHeaterOnMinus"
+                                android:layout_width="44dp"
+                                android:layout_height="44dp"
+                                android:text="−"
+                                android:textSize="20sp"
+                                android:textColor="#FFFFFF"
+                                android:backgroundTint="#E53935"/>
+
+                            <TextView
+                                android:id="@+id/tvHeaterOn"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="28"
+                                android:textSize="24sp"
+                                android:textStyle="bold"
+                                android:textColor="#D32F2F"
+                                android:gravity="center"/>
+
+                            <Button
+                                android:id="@+id/btnHeaterOnPlus"
+                                android:layout_width="44dp"
+                                android:layout_height="44dp"
+                                android:text="+"
+                                android:textSize="20sp"
+                                android:textColor="#FFFFFF"
+                                android:backgroundTint="#43A047"/>
+                        </LinearLayout>
                     </LinearLayout>
 
+                    <!-- Tắt sưởi khi -->
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -125,15 +196,46 @@
                             android:layout_height="wrap_content"
                             android:text="Tắt sưởi khi &gt; (°C)"
                             android:textSize="12sp"
-                            android:textColor="#757575"/>
+                            android:textColor="#757575"
+                            android:layout_marginBottom="8dp"/>
 
-                        <EditText
-                            android:id="@+id/etHeaterOff"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="numberDecimal"
-                            android:hint="29.0"
-                            android:background="@drawable/edit_text_background"/>
+                            android:orientation="horizontal"
+                            android:gravity="center"
+                            android:background="@drawable/edit_text_background"
+                            android:padding="4dp">
+
+                            <Button
+                                android:id="@+id/btnHeaterOffMinus"
+                                android:layout_width="44dp"
+                                android:layout_height="44dp"
+                                android:text="−"
+                                android:textSize="20sp"
+                                android:textColor="#FFFFFF"
+                                android:backgroundTint="#E53935"/>
+
+                            <TextView
+                                android:id="@+id/tvHeaterOff"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="29"
+                                android:textSize="24sp"
+                                android:textStyle="bold"
+                                android:textColor="#D32F2F"
+                                android:gravity="center"/>
+
+                            <Button
+                                android:id="@+id/btnHeaterOffPlus"
+                                android:layout_width="44dp"
+                                android:layout_height="44dp"
+                                android:text="+"
+                                android:textSize="20sp"
+                                android:textColor="#FFFFFF"
+                                android:backgroundTint="#43A047"/>
+                        </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -145,8 +247,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             app:cardCornerRadius="12dp"
-            app:cardElevation="4dp"
-            xmlns:app="http://schemas.android.com/apk/res-auto">
+            app:cardElevation="4dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -166,8 +267,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="8dp">
+                    android:layout_marginTop="12dp">
 
+                    <!-- Bật bơm khi -->
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -178,19 +280,51 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Bật bơm khi mực nước &lt; (cm)"
+                            android:text="Bật bơm khi &lt; (cm)"
                             android:textSize="12sp"
-                            android:textColor="#757575"/>
+                            android:textColor="#757575"
+                            android:layout_marginBottom="8dp"/>
 
-                        <EditText
-                            android:id="@+id/etPumpOn"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="numberDecimal"
-                            android:hint="10.0"
-                            android:background="@drawable/edit_text_background"/>
+                            android:orientation="horizontal"
+                            android:gravity="center"
+                            android:background="@drawable/edit_text_background"
+                            android:padding="4dp">
+
+                            <Button
+                                android:id="@+id/btnPumpOnMinus"
+                                android:layout_width="44dp"
+                                android:layout_height="44dp"
+                                android:text="−"
+                                android:textSize="20sp"
+                                android:textColor="#FFFFFF"
+                                android:backgroundTint="#E53935"/>
+
+                            <TextView
+                                android:id="@+id/tvPumpOn"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="10"
+                                android:textSize="24sp"
+                                android:textStyle="bold"
+                                android:textColor="#1976D2"
+                                android:gravity="center"/>
+
+                            <Button
+                                android:id="@+id/btnPumpOnPlus"
+                                android:layout_width="44dp"
+                                android:layout_height="44dp"
+                                android:text="+"
+                                android:textSize="20sp"
+                                android:textColor="#FFFFFF"
+                                android:backgroundTint="#43A047"/>
+                        </LinearLayout>
                     </LinearLayout>
 
+                    <!-- Tắt bơm khi -->
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -201,17 +335,48 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Tắt bơm khi mực nước &gt; (cm)"
+                            android:text="Tắt bơm khi &gt; (cm)"
                             android:textSize="12sp"
-                            android:textColor="#757575"/>
+                            android:textColor="#757575"
+                            android:layout_marginBottom="8dp"/>
 
-                        <EditText
-                            android:id="@+id/etPumpOff"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="numberDecimal"
-                            android:hint="20.0"
-                            android:background="@drawable/edit_text_background"/>
+                            android:orientation="horizontal"
+                            android:gravity="center"
+                            android:background="@drawable/edit_text_background"
+                            android:padding="4dp">
+
+                            <Button
+                                android:id="@+id/btnPumpOffMinus"
+                                android:layout_width="44dp"
+                                android:layout_height="44dp"
+                                android:text="−"
+                                android:textSize="20sp"
+                                android:textColor="#FFFFFF"
+                                android:backgroundTint="#E53935"/>
+
+                            <TextView
+                                android:id="@+id/tvPumpOff"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="20"
+                                android:textSize="24sp"
+                                android:textStyle="bold"
+                                android:textColor="#1976D2"
+                                android:gravity="center"/>
+
+                            <Button
+                                android:id="@+id/btnPumpOffPlus"
+                                android:layout_width="44dp"
+                                android:layout_height="44dp"
+                                android:text="+"
+                                android:textSize="20sp"
+                                android:textColor="#FFFFFF"
+                                android:backgroundTint="#43A047"/>
+                        </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
