@@ -250,7 +250,7 @@ private val ALERT_COOLDOWN = 60000L // Thời gian chờ giữa 2 cảnh báo (m
 
 | Đăng nhập | Dashboard | Biểu đồ | Cài đặt |
 |:---------:|:---------:|:-------:|:-------:|
-| 📱 | ![img.png](img.png) | 📱 | 📱 |
+| ![img_3.png](img_3.png) | ![img.png](img.png) | ![img_1.png](img_1.png) | ![img_2.png](img_2.png) |
 
 ## 🔧 Phát Triển Trong Tương Lai
 
